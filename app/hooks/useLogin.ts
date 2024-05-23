@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
-import { FormEventHandler, useEffect, useRef } from "react";
-import { Bounce, toast } from "react-toastify";
+import { FormEventHandler, useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import { toastOptions } from "../utils/constants";
 
 function useLogin() {
@@ -8,14 +8,18 @@ function useLogin() {
   const userNameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  let currentUser: string | null = null;
+  const [currentUser, setCurrentUser] = useState<string>();
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    currentUser = sessionStorage.getItem("currentUser");
+    setCurrentUser(sessionStorage.getItem("currentUser") as string);
   });
 
   useEffect(() => {
     if (currentUser) {
       router?.push("/dashboard");
+    } else {
+      setLoading(false);
     }
   }, [currentUser]);
 
@@ -38,7 +42,8 @@ function useLogin() {
 
   const handleLogout = () => {
     sessionStorage.clear();
-    router?.push("/");
+    router?.replace("/");
+    setCurrentUser("");
   };
 
   return {
@@ -47,6 +52,7 @@ function useLogin() {
     handleSubmit,
     currentUser,
     handleLogout,
+    loading,
   };
 }
 

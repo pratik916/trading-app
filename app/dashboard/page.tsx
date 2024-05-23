@@ -1,11 +1,13 @@
 import React from "react";
-import LogoutButton from "./logoutButton";
+import Portfolio from "../components/portfolio";
+import BuyStockModal from "../components/buyStockModal";
 
 function Page() {
   return (
-    <div>
-      <LogoutButton />
-    </div>
+    <>
+      <Portfolio />
+      <BuyStockModal />
+    </>
   );
 }
 
