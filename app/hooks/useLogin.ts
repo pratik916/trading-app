@@ -2,11 +2,13 @@ import { useRouter } from "next/navigation";
 import { FormEventHandler, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { toastOptions } from "../utils/constants";
+import { usePortfolioStore } from "../stores/portfolioStore";
 
 function useLogin() {
   const router = useRouter();
   const userNameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const { resetStore } = usePortfolioStore();
 
   const [currentUser, setCurrentUser] = useState<string>();
   const [loading, setLoading] = useState(true);
@@ -45,6 +47,7 @@ function useLogin() {
     sessionStorage.clear();
     router?.replace("/");
     setCurrentUser("");
+    resetStore();
   };
 
   return {

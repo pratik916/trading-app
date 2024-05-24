@@ -50,7 +50,7 @@ export const usePortfolioStore = create<
         },
         resetStore: () => {
           set((state) => {
-            state.entries = [];
+            state.entries = [initialEntry];
           });
         },
       })),
