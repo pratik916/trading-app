@@ -34,13 +34,13 @@ function Portfolio() {
 
       <div className=" mb-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex justify-between">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white ">
-          Opening Balance: {entries?.[0].total.toLocaleString()}
+          Opening Balance: ${entries?.[0].total.toLocaleString()}
         </h5>
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white inline-block">
-          Available Balance: {availableBalance.toLocaleString()}
+          Available Balance: ${availableBalance.toLocaleString()}
         </h5>
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white inline-block">
-          Total Holdings: {Math.abs(totalHoldingValue).toLocaleString()}
+          Total Holdings: ${Math.abs(totalHoldingValue).toLocaleString()}
         </h5>
       </div>
 
