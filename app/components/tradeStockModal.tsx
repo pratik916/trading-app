@@ -194,7 +194,7 @@ function TradeStockModal({
             </Col>
             <Col span={12}>
               <div className="flex flex-col">
-                <b>Total Holding:</b> ${maxQuantity.toLocaleString()}
+                <b>Total Holding:</b> {maxQuantity.toLocaleString()}
               </div>
             </Col>
           </Row>
