@@ -2,13 +2,14 @@
 
 import React from "react";
 import useLogin from "../hooks/useLogin";
+import Loader from "./loader";
 
 function LoginForm() {
   const { userNameRef, currentUser, passwordRef, handleSubmit, loading } =
     useLogin();
 
   if (loading) {
-    return "Loading";
+    return <Loader />;
   }
 
   return (

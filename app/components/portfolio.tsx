@@ -1,13 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePortfolioStore } from "../stores/portfolioStore";
 import PortfolioList from "./portfolioList";
 import TradeStockModal from "./tradeStockModal";
 import useAvailableBalance from "../hooks/useAvailableBalance";
 import OrderBook from "./orderBook";
 import classNames from "classnames";
+import { useRouter } from "next/navigation";
 
 function Portfolio() {
+  const router = useRouter();
+  useEffect(() => {
+    if (!sessionStorage.getItem("currentUser")) {
+      router.push("/");
+    }
+  }, []);
   const [currentView, setCurrentView] = useState<"portfolio" | "orders">(
     "portfolio",
   );
