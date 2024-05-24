@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { finnhubApiKey } from "../utils/apis";
 
 function useGetLivePrice(symbol: string) {
-  const [price, setPrice] = useState<number>();
+  const [livePrice, setPrice] = useState<number>();
   useEffect(() => {
     if (symbol) {
       const socket = new WebSocket(
@@ -19,7 +19,9 @@ function useGetLivePrice(symbol: string) {
         console.log("Message from server ", event.data);
         const data = JSON.parse(event.data);
         console.log("data", data);
-        setPrice(data?.[0]?.p);
+        if (data?.data?.[0]?.p) {
+          setPrice(data?.data?.[0]?.p);
+        }
       });
 
       // Unsubscribe
@@ -31,7 +33,7 @@ function useGetLivePrice(symbol: string) {
   }, [symbol]);
 
   return {
-    price,
+    livePrice,
   };
 }
 

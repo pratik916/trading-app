@@ -1,59 +1,70 @@
 import React from "react";
+import { Entry, usePortfolioStore } from "../stores/portfolioStore";
+
+export const SellBadge = () => (
+  <span className="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
+    Sell
+  </span>
+);
+
+export const BuyBadge = () => (
+  <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+    Buy
+  </span>
+);
 
 function OrderBook() {
+  const { entries } = usePortfolioStore();
+  const map = new Map<string, Entry>();
+  const portfolioEntries = entries.filter(
+    (e) => e.type === "buy" || e.type === "sell",
+  );
+
+  console.log({ portfolioEntries });
   return (
     <div className="relative overflow-x-auto">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-6 py-3">
-              Product name
+              Stock name
             </th>
             <th scope="col" className="px-6 py-3">
-              Color
+              Avg. Price
             </th>
             <th scope="col" className="px-6 py-3">
-              Category
+              Quantity
             </th>
             <th scope="col" className="px-6 py-3">
-              Price
+              Total
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Type
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Apple MacBook Pro 17"
-            </th>
-            <td className="px-6 py-4">Silver</td>
-            <td className="px-6 py-4">Laptop</td>
-            <td className="px-6 py-4">$2999</td>
-          </tr>
-          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Microsoft Surface Pro
-            </th>
-            <td className="px-6 py-4">White</td>
-            <td className="px-6 py-4">Laptop PC</td>
-            <td className="px-6 py-4">$1999</td>
-          </tr>
-          <tr className="bg-white dark:bg-gray-800">
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Magic Mouse 2
-            </th>
-            <td className="px-6 py-4">Black</td>
-            <td className="px-6 py-4">Accessories</td>
-            <td className="px-6 py-4">$99</td>
-          </tr>
+          {portfolioEntries.map((ent) => {
+            return (
+              <tr
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                key={ent.id}
+              >
+                <th
+                  scope="row"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  {ent.desc}
+                </th>
+                <td className="px-6 py-4">{ent.price}</td>
+                <td className="px-6 py-4">{ent.quantity}</td>
+                <td className="px-6 py-4">{Math.abs(ent.total)}</td>
+                <td className="px-6 py-4">
+                  {ent.type === "buy" ? <BuyBadge /> : <SellBadge />}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

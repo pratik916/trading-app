@@ -17,6 +17,8 @@ export interface Entry {
 
 type PortfolioState = {
   entries: Entry[];
+  addEntry: (entry: Entry) => void;
+  resetStore: () => void;
 };
 
 const initialEntry: Entry = {
@@ -41,6 +43,16 @@ export const usePortfolioStore = create<
     persist(
       immer((set) => ({
         entries: [initialEntry],
+        addEntry: (entry) => {
+          set((state) => {
+            state.entries.push(entry);
+          });
+        },
+        resetStore: () => {
+          set((state) => {
+            state.entries = [];
+          });
+        },
       })),
       {
         name: "portfolio-storage",

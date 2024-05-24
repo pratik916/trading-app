@@ -1,12 +1,11 @@
 import React from "react";
 import Portfolio from "../components/portfolio";
-import BuyStockModal from "../components/buyStockModal";
+import BuyStockModal from "../components/tradeStockModal";
 
 function Page() {
   return (
     <>
       <Portfolio />
-      <BuyStockModal />
     </>
   );
 }
