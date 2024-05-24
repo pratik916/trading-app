@@ -72,6 +72,13 @@ function TradeStockModal({
         );
       }
 
+      if (!data.length) {
+        return toast.error(
+          "Please wait until we fetch the stock details.",
+          toastOptions,
+        );
+      }
+
       if (price) {
         addEntry({
           id: uuidv4(),
