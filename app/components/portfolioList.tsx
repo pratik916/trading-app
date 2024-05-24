@@ -48,9 +48,11 @@ function PortfolioList() {
                 >
                   {ent.desc}
                 </th>
-                <td className="px-6 py-4">{ent.price}</td>
+                <td className="px-6 py-4">${ent.price.toLocaleString()}</td>
                 <td className="px-6 py-4">{ent.quantity}</td>
-                <td className="px-6 py-4">{Math.abs(ent.total)}</td>
+                <td className="px-6 py-4">
+                  ${Math.abs(ent.total).toLocaleString()}
+                </td>
                 <td className="px-6 py-4">
                   <button
                     onClick={() => {

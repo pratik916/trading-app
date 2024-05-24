@@ -104,7 +104,7 @@ function TradeStockModal({
   return (
     <Modal
       open
-      title="Title"
+      title={type === "buy" ? "Buy Stock" : "Sell Stock"}
       okText="Buy"
       onOk={handleOk}
       onCancel={onClose}
@@ -178,22 +178,23 @@ function TradeStockModal({
             </Col>
             <Col span={12}>
               <div className="flex flex-col">
-                <b>Available Balance:</b> {balance.toLocaleString()}
+                <b>Available Balance:</b> ${balance.toLocaleString()}
               </div>
             </Col>
             <Col span={12}>
               <div className="flex flex-col">
-                <b>Total Trade Value:</b> {totalTradeValue.toLocaleString()}
+                <b>Total Trade Value:</b> ${totalTradeValue.toLocaleString()}
               </div>
             </Col>
             <Col span={12}>
               <div className="flex flex-col">
-                <b>Balance After trade:</b> {balanceAfterTrade.toLocaleString()}
+                <b>Balance After trade:</b> $
+                {balanceAfterTrade.toLocaleString()}
               </div>
             </Col>
             <Col span={12}>
               <div className="flex flex-col">
-                <b>Total Holding:</b> {maxQuantity.toLocaleString()}
+                <b>Total Holding:</b> ${maxQuantity.toLocaleString()}
               </div>
             </Col>
           </Row>

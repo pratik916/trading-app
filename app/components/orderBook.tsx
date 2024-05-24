@@ -29,7 +29,7 @@ function OrderBook() {
               Stock name
             </th>
             <th scope="col" className="px-6 py-3">
-              Avg. Price
+              Price
             </th>
             <th scope="col" className="px-6 py-3">
               Quantity
@@ -55,9 +55,13 @@ function OrderBook() {
                 >
                   {ent.desc}
                 </th>
-                <td className="px-6 py-4">{ent.price}</td>
+                <td className="px-6 py-4">
+                  ${Number(Math.abs(ent.price).toFixed(2)).toLocaleString()}
+                </td>
                 <td className="px-6 py-4">{ent.quantity}</td>
-                <td className="px-6 py-4">{Math.abs(ent.total)}</td>
+                <td className="px-6 py-4">
+                  ${Number(Math.abs(ent.total).toFixed(2)).toLocaleString()}
+                </td>
                 <td className="px-6 py-4">
                   {ent.type === "buy" ? <BuyBadge /> : <SellBadge />}
                 </td>
