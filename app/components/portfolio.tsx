@@ -13,7 +13,7 @@ function Portfolio() {
   );
   const [open, setIsOpen] = useState(false);
   const { entries } = usePortfolioStore();
-  const available = useAvailableBalance();
+  const { availableBalance, totalHoldingValue } = useAvailableBalance();
   const activeClasses =
     "text-blue-600 bg-gray-50 dark:bg-gray-700   active  dark:text-white";
   const normalClasses =
@@ -37,7 +37,10 @@ function Portfolio() {
           Opening Balance: {entries?.[0].total.toLocaleString()}
         </h5>
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white inline-block">
-          Available Balance: {available.toLocaleString()}
+          Available Balance: {availableBalance.toLocaleString()}
+        </h5>
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white inline-block">
+          Total Holdings: {Math.abs(totalHoldingValue).toLocaleString()}
         </h5>
       </div>
 

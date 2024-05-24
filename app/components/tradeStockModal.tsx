@@ -45,11 +45,12 @@ function TradeStockModal({
     }
   }, [inputSymbol]);
 
-  const balance = useAvailableBalance();
+  const { availableBalance } = useAvailableBalance();
 
   const totalTradeValue = (price || 0) * (quantity || 0);
   const balanceAfterTrade =
-    balance - (type === "sell" ? -1 : 1) * (price || 0) * (quantity || 0);
+    availableBalance -
+    (type === "sell" ? -1 : 1) * (price || 0) * (quantity || 0);
 
   const handleOk = async () => {
     try {
@@ -178,7 +179,7 @@ function TradeStockModal({
             </Col>
             <Col span={12}>
               <div className="flex flex-col">
-                <b>Available Balance:</b> ${balance.toLocaleString()}
+                <b>Available Balance:</b> ${availableBalance.toLocaleString()}
               </div>
             </Col>
             <Col span={12}>
