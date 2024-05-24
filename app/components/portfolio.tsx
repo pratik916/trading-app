@@ -18,7 +18,7 @@ function Portfolio() {
     "text-blue-600 bg-gray-50 dark:bg-gray-700   active  dark:text-white";
   const normalClasses =
     "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300";
-  console.log({ entries });
+
   return (
     <div className="p-2 ">
       <div className="flex items-center justify-center p-4">

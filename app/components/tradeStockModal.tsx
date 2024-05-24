@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { usePortfolioStore } from "../stores/portfolioStore";
 import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
+import { toastOptions } from "../utils/constants";
 
 interface TradeStockModalProps {
   onClose: () => void;
@@ -55,14 +56,20 @@ function TradeStockModal({
       await form.validateFields();
 
       if (balanceAfterTrade < 0) {
-        return toast.error("Trade value exceeded");
+        return toast.error("Trade value exceeded", toastOptions);
       }
       if (totalTradeValue <= 0) {
-        return toast.error("Trade value must be greater than zero");
+        return toast.error(
+          "Trade value must be greater than zero",
+          toastOptions,
+        );
       }
 
       if (type === "sell" && Number(quantity) > Number(maxQuantity)) {
-        return toast.error("Quantity can not be greater total holdings.");
+        return toast.error(
+          "Quantity can not be greater total holdings.",
+          toastOptions,
+        );
       }
 
       if (price) {
@@ -71,19 +78,19 @@ function TradeStockModal({
           price,
           quantity,
           symbol,
-          total: (type === "buy" ? -1 : 1) * totalTradeValue,
+          total: totalTradeValue,
           type,
           time: dayjs().format("YYYY-MM-DDTHH:mm:ss"),
           desc: data?.find((s) => s.value === symbol)?.label,
         });
         onClose();
         toast.success(
-          `Successfully bought ${symbol} ${quantity} at ${price} price` +
-            symbol,
+          `Successfully bought ${symbol} ${quantity} at ${price} price`,
+          toastOptions,
         );
       }
     } catch (error: any) {
-      toast.error(error.errorFields?.[0]?.errors?.[0]);
+      toast.error(error.errorFields?.[0]?.errors?.[0], toastOptions);
     }
   };
 
@@ -105,17 +112,12 @@ function TradeStockModal({
           </button>
 
           <CancelBtn />
-          {/* <OkBtn className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" /> */}
         </>
       )}
     >
       <Form
         name="basic"
-        // labelCol={{ span: 8 }}
-        // wrapperCol={{ span: 16 }}
-        initialValues={{ symbol: inputSymbol, price: 175.2 }}
-        // onFinish={onFinish}
-        // onFinishFailed={onFinishFailed}
+        initialValues={{ symbol: inputSymbol }}
         autoComplete="off"
         form={form}
       >
@@ -143,7 +145,10 @@ function TradeStockModal({
                 label="Price"
                 name="price"
                 rules={[
-                  { required: true, message: "Please input your search!" },
+                  {
+                    required: true,
+                    message: "Please wait for price to be fetched!",
+                  },
                 ]}
               >
                 <Input disabled />

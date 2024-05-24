@@ -16,7 +16,6 @@ function useSearchStock() {
           };
         }) || [],
       );
-      console.log({ result });
     }
   }, 1000);
 

@@ -37,6 +37,7 @@ function useLogin() {
       router?.push("/dashboard");
     } else {
       toast.error("Wrong username or password!", toastOptions);
+      toast.info("Try trader/trader credentials", toastOptions);
     }
   };
 
